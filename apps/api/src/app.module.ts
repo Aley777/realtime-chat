@@ -4,11 +4,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { validateEnv } from './config/env.validation';
 import { PrismaModule } from './prisma/prisma.module';
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true, validate: validateEnv }),
     PrismaModule,
+    HealthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
