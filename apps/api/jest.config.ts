@@ -17,7 +17,11 @@ const config: Config = {
   transform: {
     '^.+\\.(t|j)s$': 'ts-jest',
   },
-  moduleNameMapper: pathsToModuleNameMapper(paths, { prefix: '<rootDir>/' }),
+    moduleNameMapper: {
+      ...pathsToModuleNameMapper(paths, { prefix: '<rootDir>/' }),
+      // Prisma's generated client imports './x.js' but the files on disk are .ts
+      '^(\\.{1,2}/.*)\\.js$': '$1',
+    },
   collectCoverageFrom: [
     'src/**/*.(t|j)s',
     'libs/**/*.(t|j)s',
